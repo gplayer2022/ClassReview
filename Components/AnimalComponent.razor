@@ -1,0 +1,51 @@
+﻿@using ClassReview.Model;
+
+<h2>個別の動物たち</h2>
+
+<h3>鳥の場合</h3>
+
+<p>クラス Bird 型のインスタンスを作成する。</p>
+
+<ul>
+    <li>名前 : @pea.Name</li>
+    <li>HP : @pea.Hp</li>
+    <li>メッセージ : @peaMessage</li>
+</ul>
+<p><button type="button" @onclick="peaEat">食べる</button></p>
+<p><button type="button" @onclick="peaFight">戦う</button></p>
+<p><button type="button" @onclick="peaSpawn">孵化する</button></p>
+
+@code {
+    /// <summary>
+    /// 鳥のインスタンス
+    /// </summary>
+    private Bird pea = new Bird("ピーちゃん", 20);
+    /// <summary>
+    /// 鳥のメッセージ
+    /// </summary>
+    private string peaMessage;
+
+    /// <summary>
+    /// 鳥が食べる
+    /// </summary>
+    private void peaEat()
+    {
+        this.peaMessage = this.pea.Eat();
+    }
+
+    /// <summary>
+    /// 鳥が戦う
+    /// </summary>
+    private void peaFight()
+    {
+        this.peaMessage = this.pea.Fight();
+    }
+
+    /// <summary>
+    /// 鳥が孵化する
+    /// </summary>
+    private void peaSpawn()
+    {
+        this.peaMessage = this.pea.Spawn();
+    }
+}

@@ -1,0 +1,106 @@
+﻿@using Model;
+
+<h2>ペットたちの情報</h2>
+
+<ul>
+    <li>現在のエサの残り : @Pet.FeedCount</li>
+    <li>メッセージ : @this.message</li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>名前</th>
+            <th>体力</th>
+            <th>食事ボタン</th>
+            <th>芸ボタン</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Pet selectedPet in this.selectedPets)
+        {
+            <tr>
+                <td>@selectedPet.Name</td>
+                <td>@selectedPet.Hp</td>
+                <td><button @onclick="() => this.Eat(selectedPet)">食べる</button></td>
+                <td><button @onclick="() => this.Play(selectedPet)">芸をする</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p><button type="button" @onclick="this.OrderByHp">HP の昇順で並べる</button></p>
+<p><button type="button" @onclick="this.OrderByHpDescending">HP の降順で並べる</button></p>
+<p><button type="button" @onclick="this.WhereGreaterThanHp5">HP 5 より大きいペットを表示</button></p>
+
+@code {
+    /// <summary>
+    /// 初期化用
+    /// </summary>
+    private List<Pet> pets;
+    /// <summary>
+    /// 表示用
+    /// </summary>
+    private List<Pet> selectedPets;
+    /// <summary>
+    /// 表示用メッセージ
+    /// </summary>
+    private string message = "";
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        this.pets = new List<Pet>
+        {
+            new Pet("ポチ", 10),
+            new Pet("タマ", 8),
+            new Pet("クロ", 12),
+        };
+        this.selectedPets = this.pets;
+    }
+
+    /// <summary>
+    /// 全ペットを HP の昇順で並び替える
+    /// </summary>
+    private void OrderByHp()
+    {
+        this.selectedPets = this.pets.OrderBy(pet => pet.Hp).ToList();
+    }
+
+    /// <summary>
+    /// 全ペットを HP の降順で並び替える
+    /// </summary>
+    private void OrderByHpDescending()
+    {
+        this.selectedPets = this.pets.OrderByDescending(pet => pet.Hp).ToList();
+    }
+
+    /// <summary>
+    /// HP 5 より大きいペットを抽出する
+    /// </summary>
+    private void WhereGreaterThanHp5()
+    {
+        this.selectedPets = this.pets.Where(pet => 5 < pet.Hp)
+            .OrderBy(pet => pet.Hp).ToList();
+    }
+
+    /// <summary>
+    /// ペットが食事をする
+    /// </summary>
+    /// <param name="pet">ペット</param>
+    private void Eat(Pet pet)
+    {
+        this.message = pet.Eat();
+    }
+
+    /// <summary>
+    /// ペットが芸をする
+    /// </summary>
+    /// <param name="pet">ペット</param>
+    private void Play(Pet pet)
+    {
+        this.message = pet.Play();
+    }
+}
