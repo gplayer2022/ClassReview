@@ -225,8 +225,11 @@ body {
             transform: translateY(-2px);
         }
     }
-
     /* 各種フォームの設定 */
+    label {
+        margin-right: 6px;
+    }
+
     code {
         padding: 0 4px;
         border-radius: 3px;
