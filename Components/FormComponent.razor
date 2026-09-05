@@ -203,6 +203,18 @@ private void OnFavoriteFruitChanged(ChangeEventArgs e, string fruit)
         </select>
     </p>
     <p>選択された好きな県 : @this.favoritePrefecture</p>
+
+    <!-- textarea -->
+    <h3>textarea タグ</h3>
+    <p>複数行に渡る文字列を書き込みます。</p>
+    <pre><code>
+&lt;textarea &#x40;bind="&#x40;this.yourComment"&gt;&lt;/textarea&gt;
+    </code></pre>
+    <p>あなたの激しい意見 : 
+        <textarea @bind="@this.yourComment"></textarea>
+    </p>
+    <p>書き込まれた激しい意見 : </p>
+    <p class="comment">@this.yourComment</p>
 </section>
 
 
@@ -218,6 +230,7 @@ private void OnFavoriteFruitChanged(ChangeEventArgs e, string fruit)
     private List<string> favoriteFruits = new List<string>();
     private string gender = "";
     private string favoritePrefecture = "";
+    private string yourComment = "";
 
     /// <summary>
     /// 結合された日時をプロパティで取得
