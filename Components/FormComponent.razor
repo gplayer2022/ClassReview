@@ -1,0 +1,270 @@
+﻿<h2>input タグたち</h2>
+
+<section>
+    <!-- text -->
+    <h3>text 入力フィールド</h3>
+    <p>文字列を入力します。</p>
+    <pre><code>
+&lt;input type="text" id="name" &#x40;bind="this.name" placeholder="名前を入力してください" maxlength="100" /&gt;
+    </code></pre>
+    <p>
+        <label for="name">名前 :</label>
+        <input type="text" id="name" @bind="this.name" placeholder="名前を入力してください" maxlength="100" />
+    </p>
+    <p>入力された名前 : @this.name</p>
+
+    <!-- number -->
+    <h3>number 入力フィールド</h3>
+    <p>数値を入力します。</p>
+    <pre><code>
+&lt;input type="number" id="age" &#x40;bind="this.age" min="0" max="150" step="1" /&gt;
+    </code></pre>
+    <p>
+        <label for="age">年齢 :</label>
+        <input type="number" id="age" @bind="this.age" min="0" max="150" step="1" />
+    </p>
+    <p>入力された年齢 : @this.age</p>
+
+    <!-- date -->
+    <h3>date 入力フィールド</h3>
+    <p>日付を入力します。</p>
+    <pre><code>
+&lt;input type="date" id="birthdate" &#x40;bind="this.meetUpDate" /&gt;
+    </code></pre>
+    <p>
+        <label for="birthdate">待ち合わせ年月日 :</label>
+        <input type="date" id="birthdate" @bind="this.meetUpDate" />
+    </p>
+    <p>入力された待ち合わせ年月日 : @this.meetUpDate</p>
+
+    <!-- time -->
+    <h3>time 入力フィールド</h3>
+    <p>時間を入力します。</p>
+    <pre><code>
+&lt;input type="time" id="time" &#x40;bind="this.meetUpTime" /&gt;
+    </code></pre>
+    <p>
+        <label for="time">待ち合わせ時刻 :</label>
+        <input type="time" id="time" @bind="this.meetUpTime" />
+    </p>
+    <p>入力された待ち合わせ時刻 : @this.meetUpTime</p>
+
+    <p>結合された待ち合わせ日時 : @this.CombinedDateTime</p>
+
+    <!-- password -->
+    <h3>password 入力フィールド</h3>
+    <p>パスワードを入力します。</p>
+    <pre><code>
+&lt;input type="password" id="password" &#x40;bind="this.password" /&gt;
+    </code></pre>
+    <p>
+        <label for="password">パスワード :</label>
+        <input type="password" id="password" @bind="this.password" />
+    </p>
+    <p>入力されたパスワード : @this.password</p>
+
+    <!-- color -->
+    <h3>color 入力フィールド</h3>
+    <p>色を選択します。</p>
+    <pre><code>
+&lt;input type="color" id="favoriteColor" &#x40;bind="this.favoriteColor" /&gt;
+    </code></pre>
+    <p>
+        <label for="favoriteColor">お気に入りの色 :</label>
+        <input type="color" id="favoriteColor" @bind="this.favoriteColor" />
+    </p>
+    <p style="color: @this.favoriteColor">入力されたお気に入りの色 : @this.favoriteColor</p>
+
+    <!-- range -->
+    <h3>range スライダー</h3>
+    <p>スライダーで数値を変化させます。</p>
+    <p>
+        好きな角度 :
+        <input type="range" min="0" max="360" step="1" @bind="this.favoriteDegree" />
+    </p>
+    <pre><code>
+&lt;input type="range" min="0" max="360" step="1" &#x40;bind="this.favoriteDegree" /&gt;
+    </code></pre>
+    <p>選択された好きな角度 : @(this.favoriteDegree)°</p>
+
+    <!-- chaeckbox -->
+    <h3>checkbox 入力フィールド</h3>
+    <p>項目を選択します。</p>
+    <pre><code>
+&lt;input type="checkbox" id="subscribe" &#x40;bind="this.isSubscribed" /&gt;
+    </code></pre>
+    <p>
+        <label for="subscribe">ニュースレターを購読する : </label>
+        <input type="checkbox" id="subscribe" @bind="this.isSubscribed" />
+    </p>
+    <p>購読状況 : @this.isSubscribed</p>
+
+    <!-- checkbox 2 -->
+    <h3>checkbox 入力フィールドで複数の項目を選択</h3>
+    <p>複数項目を選択します。複数項目の選択には工夫が必要です。</p>
+    <p>HTML 側の入力。</p>
+    <pre><code>
+&lt;label&gt;&lt;input type="checkbox" &#x40;onchange='e =&gt; OnFavoriteFruitChanged(e, "りんご")' /&gt; りんご&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" &#x40;onchange='e =&gt; OnFavoriteFruitChanged(e, "みかん")' /&gt; みかん&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" &#x40;onchange='e =&gt; OnFavoriteFruitChanged(e, "ぶどう")' /&gt; ぶどう&lt;/label&gt;
+    </code></pre>
+    <code>&#x40;code</code>側の入力。
+    <pre><code>
+private List&lt;string&gt; favoriteFruits = new List&lt;string&gt;();
+
+/// &lt;summary&gt;
+/// お気に入りフルーツを選択
+/// &lt;/summary&gt;
+/// &lt;param name="e"&gt;&lt;/param&gt;
+/// &lt;param name="fruit"&gt;&lt;/param&gt;
+private void OnFavoriteFruitChanged(ChangeEventArgs e, string fruit)
+{
+    if ((bool)e.Value)
+    {
+        favoriteFruits.Add(fruit);
+    }
+    else
+    {
+        favoriteFruits.Remove(fruit);
+    }
+}
+    </code></pre>
+    <p>
+        好きな果物 :
+        <label><input type="checkbox" @onchange='e => OnFavoriteFruitChanged(e, "りんご")' /> りんご</label>
+        <label><input type="checkbox" @onchange='e => OnFavoriteFruitChanged(e, "みかん")' /> みかん</label>
+        <label><input type="checkbox" @onchange='e => OnFavoriteFruitChanged(e, "ぶどう")' /> ぶどう</label>
+    </p>
+    <p>入力された好きな果物 : @string.Join("・", this.favoriteFruits)</p>
+</section>
+
+<section>
+    <h2>input タグ以外たち</h2>
+    <!-- radio -->
+    <h3>radio ボタン</h3>
+    <p>選択肢の中からひとつだけ選択します。</p>
+    <p>専用のコンポーネント<code>InputRadioGroup</code>を利用します。</p>
+    <pre><code>
+性別 : &lt;InputRadioGroup &#x40;bind-Value="this.gender"&gt;
+    &lt;label&gt;
+        &lt;InputRadio Value="&#x40;("男")" /&gt;
+        男
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;InputRadio Value="&#x40;("女")" /&gt;
+        女
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;InputRadio Value="&#x40;("その他")" /&gt;
+        その他
+    &lt;/label&gt;
+&lt;/InputRadioGroup&gt;
+    </code></pre>
+    <p>
+        性別 :
+        <InputRadioGroup @bind-Value="this.gender">
+            <label>
+                <InputRadio Value="@("男")" />
+                男
+            </label>
+
+            <label>
+                <InputRadio Value="@("女")" />
+                女
+            </label>
+
+            <label>
+                <InputRadio Value="@("その他")" />
+                その他
+            </label>
+        </InputRadioGroup>
+    </p>
+    <p>選択された性別 : @this.gender</p>
+
+    <!-- select -->
+    <h3>select タグ</h3>
+    <p>選択肢の中からひとつ選択します。</p>
+    <pre><code>
+好きな県 :
+&lt;select &#x40;bind="this.favoritePrefecture"&gt;
+    &lt;option value="山形県"&gt;山形県&lt;/option&gt;
+    &lt;option value="鳥取県"&gt;鳥取県&lt;/option&gt;
+    &lt;option value="香川県"&gt;香川県&lt;/option&gt;
+&lt;/select&gt;
+    </code></pre>
+    <p>
+        好きな県 :
+        <select @bind="this.favoritePrefecture">
+            <option value="山形県">山形県</option>
+            <option value="鳥取県">鳥取県</option>
+            <option value="香川県">香川県</option>
+        </select>
+    </p>
+    <p>選択された好きな県 : @this.favoritePrefecture</p>
+</section>
+
+
+@code {
+    private string name = "";
+    private int age = 0;
+    private DateTime meetUpDate = DateTime.Today;
+    private DateTime meetUpTime = DateTime.Now;
+    private string password = "";
+    private string favoriteColor = "#000000";
+    private int favoriteDegree = 0;
+    private bool isSubscribed = false;
+    private List<string> favoriteFruits = new List<string>();
+    private string gender = "";
+    private string favoritePrefecture = "";
+
+    /// <summary>
+    /// 結合された日時をプロパティで取得
+    /// </summary>
+    private DateTime CombinedDateTime
+    {
+        get
+        {
+            return CombineDateTime(this.meetUpDate, this.meetUpTime);
+        }
+    }
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        // @bind は双方向バインディングする
+        // this.name = "田吾作";
+    }
+
+    /// <summary>
+    /// 日と時を結合して DateTime を返す
+    /// </summary>
+    /// <param name="date">日</param>
+    /// <param name="time">時</param>
+    /// <returns>結合された日時</returns>
+    private DateTime CombineDateTime(DateTime date, DateTime time)
+    {
+        return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+    }
+
+    /// <summary>
+    /// お気に入りフルーツを選択
+    /// </summary>
+    /// <param name="e"></param>
+    /// <param name="fruit"></param>
+    private void OnFavoriteFruitChanged(ChangeEventArgs e, string fruit)
+    {
+        Console.WriteLine("お気に入りフルーツの ChangeEventArgs: {0}", e.Value);
+        if ((bool)e.Value)
+        {
+            favoriteFruits.Add(fruit);
+        }
+        else
+        {
+            favoriteFruits.Remove(fruit);
+        }
+    }
+}

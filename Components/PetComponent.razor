@@ -1,39 +1,85 @@
 ﻿@using Model;
 
-<h2>ペットたちの情報</h2>
-
+<p>クラス Pet を使って、以下のことを学習します。</p>
 <ul>
-    <li>現在のエサの残り : @Pet.FeedCount</li>
-    <li>メッセージ : @this.message</li>
+    <li>
+        クラスのメンバたち
+        <ul>
+            <li>
+                データ
+                <ul>
+                    <li>フィールド : 基本的にはすべて private 修飾する</li>
+                    <li>プロパティ : 外部からのアクセスを制御する。 get と set の必要なもののみ実装する</li>
+                </ul>
+            </li>
+            <li>
+                処理
+                <ul>
+                    <li>メソッド : 引数と戻り値を持つ。引数の型・または引数の数が異なる場合は、同一名のメソッドを複数定義できる（オーバロード）</li>
+                    <li>コンストラクタ : new するときにのみ呼び出される特別なメソッド。クラス名と同一名にし、戻り値はもたない</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
 </ul>
 
-<table>
-    <thead>
-        <tr>
-            <th>名前</th>
-            <th>体力</th>
-            <th>食事ボタン</th>
-            <th>芸ボタン</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Pet selectedPet in this.selectedPets)
-        {
-            <tr>
-                <td>@selectedPet.Name</td>
-                <td>@selectedPet.Hp</td>
-                <td><button @onclick="() => this.Eat(selectedPet)">食べる</button></td>
-                <td><button @onclick="() => this.Play(selectedPet)">芸をする</button></td>
-            </tr>
-        }
-    </tbody>
-</table>
+<section>
+    <h2>ペット「きなこ」の場合</h2>
+    <p>クラス Pet を new してインスタンス「きなこ」を作成します。</p>
+    <ul>
+        <li>体力 : @kinako.Hp</li>
+        <li>現在のエサの残り : @Pet.FeedCount</li>
+        <li>メッセージ : @this.kinakoMessage</li>
+    </ul>
+    <p><button type="button" @onclick="() => this.kinakoMessage = this.kinako.Eat()">食べる</button></p>
+    <p><button type="button" @onclick="() => this.kinakoMessage = this.kinako.Play()">芸をする</button></p>
+</section>
 
-<p><button type="button" @onclick="this.OrderByHp">HP の昇順で並べる</button></p>
-<p><button type="button" @onclick="this.OrderByHpDescending">HP の降順で並べる</button></p>
-<p><button type="button" @onclick="this.WhereGreaterThanHp5">HP 5 より大きいペットを表示</button></p>
+<section>
+    <h2>ペットたちの List の場合</h2>
+    <p>ペットたちのリストを作成します。</p>
+    <p>static 修飾された feedCount はすべてのペットたち（「きなこ」も含めて）で共有されています。</p>
+    <ul>
+        <li>現在のエサの残り : @Pet.FeedCount</li>
+        <li>メッセージ : @this.message</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>体力</th>
+                <th>食事ボタン</th>
+                <th>芸ボタン</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Pet selectedPet in this.selectedPets)
+            {
+                <tr>
+                    <td>@selectedPet.Name</td>
+                    <td>@selectedPet.Hp</td>
+                    <td><button @onclick="() => this.Eat(selectedPet)">食べる</button></td>
+                    <td><button @onclick="() => this.Play(selectedPet)">芸をする</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><button type="button" @onclick="this.OrderByHp">HP の昇順で並べる</button></p>
+    <p><button type="button" @onclick="this.OrderByHpDescending">HP の降順で並べる</button></p>
+    <p><button type="button" @onclick="this.WhereGreaterThanHp5">HP 5 より大きいペットを表示</button></p>
+
+</section>
 
 @code {
+    /// <summary>
+    /// きなこ
+    /// </summary>
+    private Pet kinako = new Pet("きなこ", 18);
+    /// <summary>
+    /// きなこ用のメッセージ
+    /// </summary>
+    private string kinakoMessage = "";
     /// <summary>
     /// 初期化用
     /// </summary>

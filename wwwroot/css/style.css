@@ -27,6 +27,7 @@ body {
 #menu-checkbox {
     display: none;
 }
+
 /* インラインで直接表示する場合 */
 .hamburger-menu.display-inline {
     .hamburger-icon {
@@ -142,6 +143,11 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
 
+    section {
+        margin-bottom: 3rem;
+        border-bottom: solid 1px var(--bg-color);
+    }
+
     h1 {
         border-left: solid 6px var(--thema-color);
         padding-left: 6px;
@@ -161,6 +167,10 @@ body {
     h3 {
         border-bottom: dashed 1px var(--thema-color);
         font-size: 1.0rem;
+
+        ~ h3 {
+            margin-top: 3rem;
+        }
     }
 
     ul {
@@ -215,6 +225,23 @@ body {
             transform: translateY(-2px);
         }
     }
+
+    /* 各種フォームの設定 */
+    code {
+        padding: 0 4px;
+        border-radius: 3px;
+        background-color: #f8f0e4;
+    }
+
+    pre code {
+        display: block;
+        padding: 0 8px;
+        border-radius: 8px;
+        /* 必須。 HTML の改行・スペースを保持したまま、枠端で自動折り返しさせる */
+        white-space: pre-wrap;
+        /* 単語の切れ目を考慮しつつ、必要なら途中で切る（モダンCSSの標準設定） */
+        overflow-wrap: anywhere;
+        /* 従来からの強制改行 */
+        word-break: break-all;
+    }
 }
-
-

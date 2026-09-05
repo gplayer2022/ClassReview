@@ -55,5 +55,25 @@
             }
             return message;
         }
+
+        /// <summary>
+        /// 鳴く（独自メソッド）
+        /// </summary>
+        /// <returns>鳴いたときのメッセージ</returns>
+        internal string Sing()
+        {
+            string message;
+            // 死んでいる場合
+            if (this.hp <= 0)
+            {
+                message = $"{this.name}は死んでいる。もう何もできない。";
+            }
+            // 生きている場合
+            else
+            {
+                message = "ピー";
+            }
+            return message;
+        }
     }
 }
