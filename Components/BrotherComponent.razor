@@ -1,0 +1,45 @@
+﻿<section>
+    <h2>兄コンポーネント</h2>
+    <p>ここは兄コンポーネントです。</p>
+    <p><button @onclick="this.AddTen">10 を足す</button></p>
+    <ul>
+        <li>@this.number</li>
+    </ul>
+</section>
+
+
+@code {
+    /// <summary>
+    /// 数
+    /// </summary>
+    private int number;
+
+    /// <summary>
+    /// 受け渡しされる数
+    /// </summary>
+    [Parameter]
+    public int Number
+    {
+        set
+        {
+            this.number = value;
+        }
+    }
+
+
+    [Parameter]
+    public EventCallback<int> OnTenAdded
+    {
+        set; private get;
+    }
+
+    /// <summary>
+    /// 10 を足す
+    /// </summary>
+    /// <returns></returns>
+    private async Task AddTen()
+    {
+        this.number += 10;
+        await this.OnTenAdded.InvokeAsync(this.number);
+    }
+}

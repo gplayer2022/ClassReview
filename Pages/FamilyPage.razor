@@ -1,0 +1,51 @@
+﻿@page "/familypage/"
+@using ClassReview.Components;
+
+<main class="main">
+    <h1>親子・兄弟間でのデータの受け渡し</h1>
+    <section>
+        <h2>親コンポーネント</h2>
+        <p>
+            <button @onclick="this.InitializeNumber">初期化</button>
+        </p>
+        <ul>
+            <li>@this.number</li>
+        </ul>
+    </section>
+
+    <BrotherComponent Number="@this.number" OnTenAdded="@this.OnTenAdded" />
+
+    <SisterComponent Number="@this.number" OnTwoMultipled="@this.OnTwoMultipled" />
+</main>
+
+<Hamburger ShouldDisplayInline="false" />
+
+@code {
+    private int number = 10;
+
+    /// <summary>
+    /// データを初期化する
+    /// </summary>
+    private void InitializeNumber()
+    {
+        this.number = 0;
+    }
+
+    /// <summary>
+    /// 兄コンポーネントからデータ受け取る
+    /// </summary>
+    /// <param name="number">受け取るデータ</param>
+    private void OnTenAdded(int number)
+    {
+        this.number = number;
+    }
+
+    /// <summary>
+    /// 妹コンポーネントからデータを受け取る
+    /// </summary>
+    /// <param name="number">受け取るデータ</param>
+    private void OnTwoMultipled(int number)
+    {
+        this.number = number;
+    }
+}

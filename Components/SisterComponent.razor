@@ -1,0 +1,47 @@
+﻿<section>
+    <h2>妹コンポーネント</h2>
+    <p>ここは妹コンポーネントです。</p>
+    <p><button @onclick="this.MultipleTwo">2 で掛ける</button></p>
+    <ul>
+        <li>@this.number</li>
+    </ul>
+</section>
+
+
+@code {
+    /// <summary>
+    /// 数
+    /// </summary>
+    private int number;
+
+    /// <summary>
+    /// 受け渡しされる数
+    /// </summary>
+    [Parameter]
+    public int Number
+    {
+        set
+        {
+            this.number = value;
+        }
+    }
+
+    /// <summary>
+    /// データ受け渡し用のイベントコールバック
+    /// </summary>
+    [Parameter]
+    public EventCallback<int> OnTwoMultipled
+    {
+        set; private get;
+    }
+
+    /// <summary>
+    /// 2 で掛ける
+    /// </summary>
+    /// <returns></returns>
+    private async Task MultipleTwo()
+    {
+        this.number *= 2;
+        await this.OnTwoMultipled.InvokeAsync(this.number);
+    }
+}
