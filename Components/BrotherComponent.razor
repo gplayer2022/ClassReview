@@ -7,7 +7,6 @@
     </ul>
 </section>
 
-
 @code {
     /// <summary>
     /// 数
@@ -26,7 +25,9 @@
         }
     }
 
-
+    /// <summary>
+    /// 親コンポーネントにデータを渡すためのイベントコールバック
+    /// </summary>
     [Parameter]
     public EventCallback<int> OnTenAdded
     {
